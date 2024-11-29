@@ -43,13 +43,11 @@ namespace Pathfinder
                 foreach (var (weight, neighbor) in graph.Neighbors(current))
                 {
                     var currentToNeighbor = distance[current] + weight;
-                    if (currentToNeighbor < distance[neighbor])
-                    {
-                        priorityQueue.Remove((distance[neighbor], neighbor));
-                        distance[neighbor] = currentToNeighbor;
-                        previous[neighbor] = current;
-                        priorityQueue.Add((currentToNeighbor, neighbor));
-                    }
+                    if (!(currentToNeighbor < distance[neighbor])) continue;
+                    priorityQueue.Remove((distance[neighbor], neighbor));
+                    distance[neighbor] = currentToNeighbor;
+                    previous[neighbor] = current;
+                    priorityQueue.Add((currentToNeighbor, neighbor));
                 }
             }
 
